@@ -23,6 +23,18 @@ public class Pedido implements Serializable {
     
     @ManyToOne
     private Cliente cliente;
+    
+    private TransactionCard transaction;
+    
+    private double valor = 500;
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 
     public Pedido() {
         this.produtos = new ArrayList<>();
@@ -59,5 +71,16 @@ public class Pedido implements Serializable {
         this.cliente = cliente;
     }
 
-    
+    public TransactionCard getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(TransactionCard transaction) {
+        this.transaction = transaction;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id=" + id + ", produtos=" + produtos + ", cliente=" + cliente + ", transaction=" + transaction + ", valor=" + valor + '}';
+    }
 }

@@ -8,7 +8,6 @@ import javax.jms.JMSContext;
 import javax.jms.JMSDestinationDefinition;
 import javax.jms.JMSProducer;
 import javax.jms.Queue;
-import javax.jms.Topic;
 
 /**
  * @brief Classe EnviarEmailConfirmacao
@@ -17,10 +16,10 @@ import javax.jms.Topic;
  * @date   20/03/2018
  */
 @Stateless
-public class EnviarEmail {
+public class EnviarEmailConfirmacao {
 
-    @Resource(lookup = "jms/MyTopic")
-    private Topic fila;
+    @Resource(lookup = "jms/MyQueue")
+    private Queue fila;
 
     @Inject
     private JMSContext context;
