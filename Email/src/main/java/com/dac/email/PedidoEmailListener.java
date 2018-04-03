@@ -17,13 +17,13 @@ import org.apache.commons.mail.SimpleEmail;
  * @mail jsantos.te@gmail.com
  * @date   19/03/2018
  */
-@MessageDriven(mappedName = "java:global/jms/Topic",
+@MessageDriven(mappedName = "jms/MyQueue",
         activationConfig = {
             @ActivationConfigProperty(propertyName = "destinationType",
-                    propertyValue = "javax.jms.Topic")
+                    propertyValue = "javax.jms.Queue")
             ,
             @ActivationConfigProperty(propertyName = "destinationName",
-                    propertyValue = "topic")
+                    propertyValue = "queue")
         })
 public class PedidoEmailListener implements MessageListener{
 
@@ -47,10 +47,10 @@ public class PedidoEmailListener implements MessageListener{
             email.setAuthenticator(new DefaultAuthenticator(EMAIL, SENHA));
             email.setTLS(true);
             email.setSSL(true);
-            email.setSubject("Compra realizada");
+            email.setSubject("Compra"+pedido.getTransaction().toString());
             email.setFrom(EMAIL);
             email.setMsg("O pedido com os produtos " + pedido.getProdutos()
-                    + " foi efetuado");
+                    + " foi"+ pedido.getProdutos() );
             email.addTo(pedido.getCliente().getEmail());
             email.send();
         }catch (EmailException ex) {

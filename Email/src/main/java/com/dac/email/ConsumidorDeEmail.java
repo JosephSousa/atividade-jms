@@ -16,7 +16,7 @@ import org.apache.commons.mail.SimpleEmail;
  * @mail ricardo.job@ifpb.edu.br
  * @since 13/03/2018, 08:32:43
  */
-@MessageDriven(mappedName = "java:global/jms/Topic",
+@MessageDriven(mappedName = "jms/MyTopic",
         activationConfig = {
             @ActivationConfigProperty(propertyName = "destinationType",
                     propertyValue = "javax.jms.Topic")
@@ -41,6 +41,7 @@ public class ConsumidorDeEmail implements MessageListener {
     }
     private void enviarEmail(Pedido pedido) {
         try {
+            System.out.println(" enviando email"+pedido);
             Email email = new SimpleEmail();
             email.setHostName("smtp.googlemail.com");
             email.setAuthenticator(new DefaultAuthenticator(EMAIL, SENHA));
@@ -52,6 +53,7 @@ public class ConsumidorDeEmail implements MessageListener {
                     + " foi efetuado");
             email.addTo(pedido.getCliente().getEmail());
             email.send();
+            System.out.println(" email enviado "+pedido);
         }catch (EmailException ex) {
             ex.printStackTrace();
          }
